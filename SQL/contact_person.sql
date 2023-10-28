@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 07:54 PM
+-- Generation Time: Oct 28, 2023 at 08:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,6 +54,20 @@ CREATE TABLE `tb_person` (
   `quotes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_users`
+--
+
+CREATE TABLE `tb_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `role` enum('Admin','Peserta') NOT NULL,
+  `id_person` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -73,6 +87,14 @@ ALTER TABLE `tb_person`
   ADD KEY `fk_tb_agama` (`id_agama`);
 
 --
+-- Indexes for table `tb_users`
+--
+ALTER TABLE `tb_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `id_person` (`id_person`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -89,6 +111,12 @@ ALTER TABLE `tb_person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_users`
+--
+ALTER TABLE `tb_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -97,6 +125,12 @@ ALTER TABLE `tb_person`
 --
 ALTER TABLE `tb_person`
   ADD CONSTRAINT `tb_person_ibfk_1` FOREIGN KEY (`id_agama`) REFERENCES `tb_agama` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_users`
+--
+ALTER TABLE `tb_users`
+  ADD CONSTRAINT `tb_users_ibfk_1` FOREIGN KEY (`id_person`) REFERENCES `tb_person` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
