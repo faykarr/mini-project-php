@@ -9,3 +9,7 @@ This project is a contact person based management system with all participants d
 ## This project is still in development, not yet released
 
 Stay tune until finished! ✨
+
+## Sneak Peek
+
+<img src="./SQL/images/screenshot.png">
