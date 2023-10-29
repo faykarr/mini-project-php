@@ -117,12 +117,15 @@ if (isset($_SESSION['dataUser'])) {
                         <h4 class="mb-2">Adventure starts here 🚀</h4>
                         <p class="mb-4">Make your contact management easy and fun!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="../index.php" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="../controllers/AuthController.php"
+                            method="POST">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username"
                                     placeholder="Enter your username" autofocus />
                             </div>
+                            <input type="hidden" name="role" value="Peserta">
+                            <input type="hidden" name="id_person" value="">
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
@@ -143,7 +146,8 @@ if (isset($_SESSION['dataUser'])) {
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-primary d-grid w-100" type="submit">Sign up</button>
+                            <button class="btn btn-primary d-grid w-100" type="submit" name="process"
+                                value="insert">Sign up</button>
                         </form>
 
                         <p class="text-center">
