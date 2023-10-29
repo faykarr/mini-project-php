@@ -2,13 +2,13 @@
 
 A mini project PHP based, for MSIB Batch 5 assignment - Pemrograman PHP <br>
 
-## A Contact Person Management System
+## A Contact Person Management System | Contaxa
 
-This project is a contact person based management system with all participants data in MSIB Batch 5 - Nurul Fikri Computer - Fullstack Web Developer
+Contaxa, this project is a contact person based management system with all participants data in MSIB Batch 5 - Nurul Fikri Computer - Fullstack Web Developer
 
-## This project is still in development, not yet released
+## This project is released!
 
-Stay tune until finished! ✨
+Yeay finished! ✨ there is the link to demo <a href="https://peserta35-fwd.sib5.nurulfikri.com/contaxa/">https://peserta35-fwd.sib5.nurulfikri.com/contaxa/</a>
 
 ## Sneak Peek
 
