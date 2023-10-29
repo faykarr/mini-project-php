@@ -1,124 +1,128 @@
 <?php
-// Remove warning message
-error_reporting(E_ALL ^ E_WARNING);
+if ($_SESSION['dataUser']['role'] !== 'Peserta'):
+    // Remove warning message
+    error_reporting(E_ALL ^ E_WARNING);
 
-// make object from class agamaModel
-$agamaModel = new AgamaModel();
-// make object from class contactModel
-$personModel = new ContactModel();
-// Get id from URL
-$id = $_GET['id'];
-// get all records from agamaModel
-$agamaRecords = $agamaModel->findAll();
-// get 1 record from personModel
-$personRecord = $personModel->find($id);
-?>
+    // make object from class agamaModel
+    $agamaModel = new AgamaModel();
+    // make object from class contactModel
+    $personModel = new ContactModel();
+    // Get id from URL
+    $id = $_GET['id'];
+    // get all records from agamaModel
+    $agamaRecords = $agamaModel->findAll();
+    // get 1 record from personModel
+    $personRecord = $personModel->find($id);
+    ?>
 
 
-<!-- Content -->
-<div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Header -->
-    <div class="row justify-content-center">
-        <div class="col-12 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center row justify-content-around">
-                        <div class="col-sm-6 ">
-                            <h5 class="card-title text-primary p-0 mb-0 text-center text-sm-start">Data Person</h5>
-                        </div>
-                        <div class="col-sm-6 mt-3 mt-sm-0 text-sm-end text-center">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon2"
-                                onclick="history.back();">
-                                <i class="bx bx-arrow-back me-1"></i> Back
-                            </button>
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Header -->
+        <div class="row justify-content-center">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center row justify-content-around">
+                            <div class="col-sm-6 ">
+                                <h5 class="card-title text-primary p-0 mb-0 text-center text-sm-start">Data Person</h5>
+                            </div>
+                            <div class="col-sm-6 mt-3 mt-sm-0 text-sm-end text-center">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon2"
+                                    onclick="history.back();">
+                                    <i class="bx bx-arrow-back me-1"></i> Back
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Table -->
-    <div class="row justify-content-center ">
-        <div class="col-md-10">
-            <div class="card">
-                <h5 class="card-header">Form Edit Person</h5>
-                <hr class="m-0 w-100">
-                <div class="card-body">
-                    <form action="./controllers/ContactController.php" method="post">
-                        <div class="row justify-content-between">
-                            <div class="col-md-5">
-                                <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control mb-2" id="nama_lengkap" name="nama_lengkap"
-                                    placeholder="Input your full name here" autofocus
-                                    value="<?= $personRecord['nama_lengkap'] ?>">
-                                <label for="gender" class="form-label">Jenis Kelamin</label>
-                                <select name="gender" id="gender" class="form-control mb-2">
-                                    <option value=""> Pilih Jenis Kelamin </option>
-                                    <option value="Laki-Laki" <?= ($personRecord['gender'] == 'Laki-Laki') ? 'selected' : '' ?>>Laki-laki</option>
-                                    <option value="Perempuan" <?= ($personRecord['gender'] == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
-                                </select>
-                                <label for="id_agama" class="form-label">Agama</label>
-                                <select name="id_agama" id="id_agama" class="form-control mb-2">
-                                    <option value=""> Pilih Agama </option>
-                                    <?php foreach ($agamaRecords as $key => $value): ?>
-                                        <option value="<?= $value['id'] ?>" <?= ($personRecord['id_agama'] == $value['id']) ? 'selected' : '' ?>>
-                                            <?= $value['nama_agama'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <label for="ttl" class="form-label">Tanggal/Tempat Lahir</label>
-                                <div class="input-group" id="ttl">
-                                    <input type="date" name="tanggal_lahir" aria-label="Tanggal Lahir"
-                                        class="form-control" value="<?= $personRecord['tanggal_lahir'] ?>">
-                                    <input type="text" name="tempat_lahir" aria-label="Tempat Lahir"
-                                        class="form-control" placeholder="Input your city here"
-                                        value="<?= $personRecord['tempat_lahir'] ?>">
+        <!-- Table -->
+        <div class="row justify-content-center ">
+            <div class="col-md-10">
+                <div class="card">
+                    <h5 class="card-header">Form Edit Person</h5>
+                    <hr class="m-0 w-100">
+                    <div class="card-body">
+                        <form action="./controllers/ContactController.php" method="post">
+                            <div class="row justify-content-between">
+                                <div class="col-md-5">
+                                    <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control mb-2" id="nama_lengkap" name="nama_lengkap"
+                                        placeholder="Input your full name here" autofocus
+                                        value="<?= $personRecord['nama_lengkap'] ?>">
+                                    <label for="gender" class="form-label">Jenis Kelamin</label>
+                                    <select name="gender" id="gender" class="form-control mb-2">
+                                        <option value=""> Pilih Jenis Kelamin </option>
+                                        <option value="Laki-Laki" <?= ($personRecord['gender'] == 'Laki-Laki') ? 'selected' : '' ?>>Laki-laki</option>
+                                        <option value="Perempuan" <?= ($personRecord['gender'] == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
+                                    </select>
+                                    <label for="id_agama" class="form-label">Agama</label>
+                                    <select name="id_agama" id="id_agama" class="form-control mb-2">
+                                        <option value=""> Pilih Agama </option>
+                                        <?php foreach ($agamaRecords as $key => $value): ?>
+                                            <option value="<?= $value['id'] ?>" <?= ($personRecord['id_agama'] == $value['id']) ? 'selected' : '' ?>>
+                                                <?= $value['nama_agama'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <label for="ttl" class="form-label">Tanggal/Tempat Lahir</label>
+                                    <div class="input-group" id="ttl">
+                                        <input type="date" name="tanggal_lahir" aria-label="Tanggal Lahir"
+                                            class="form-control" value="<?= $personRecord['tanggal_lahir'] ?>">
+                                        <input type="text" name="tempat_lahir" aria-label="Tempat Lahir"
+                                            class="form-control" placeholder="Input your city here"
+                                            value="<?= $personRecord['tempat_lahir'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="asal_kampus" class="form-label">Asal Kampus</label>
+                                    <input type="text" class="form-control mb-2" id="asal_kampus" name="asal_kampus"
+                                        placeholder="Input your university here"
+                                        value="<?= $personRecord['asal_kampus'] ?>">
+                                    <label for="sosmed" class="form-label">Social Media (Instagram)</label>
+                                    <input type="text" class="form-control mb-2" id="sosmed" name="sosmed"
+                                        placeholder="Input your social media here" value="<?= $personRecord['sosmed'] ?>">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control mb-2" id="email" name="email"
+                                        placeholder="Input your email here" value="<?= $personRecord['email'] ?>">
+                                    <label for="no_hp" class="form-label">No HP</label>
+                                    <input type="text" class="form-control mb-2" id="no_hp" name="no_hp"
+                                        placeholder="Input your phone number here" value="<?= $personRecord['no_hp'] ?>">
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <label for="asal_kampus" class="form-label">Asal Kampus</label>
-                                <input type="text" class="form-control mb-2" id="asal_kampus" name="asal_kampus"
-                                    placeholder="Input your university here"
-                                    value="<?= $personRecord['asal_kampus'] ?>">
-                                <label for="sosmed" class="form-label">Social Media (Instagram)</label>
-                                <input type="text" class="form-control mb-2" id="sosmed" name="sosmed"
-                                    placeholder="Input your social media here" value="<?= $personRecord['sosmed'] ?>">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control mb-2" id="email" name="email"
-                                    placeholder="Input your email here" value="<?= $personRecord['email'] ?>">
-                                <label for="no_hp" class="form-label">No HP</label>
-                                <input type="text" class="form-control mb-2" id="no_hp" name="no_hp"
-                                    placeholder="Input your phone number here" value="<?= $personRecord['no_hp'] ?>">
+                            <div class="row justify-content-center">
+                                <div class="w-100">
+                                    <label for="foto" class="form-label">Link Profile Picture</label>
+                                    <textarea class="form-control mb-2" id="foto" name="foto" rows="2"
+                                        placeholder="Input your photo profile link here"
+                                        style="resize:none;"><?= $personRecord['foto'] ?></textarea>
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <textarea class="form-control mb-2" id="alamat" name="alamat" rows="3"
+                                        placeholder="Input your address here"
+                                        style="resize:none;"><?= $personRecord['alamat'] ?></textarea>
+                                    <label for="quotes" class="form-label">Quotes</label>
+                                    <textarea class="form-control mb-2" id="quotes" name="quotes" rows="3"
+                                        placeholder="Add your quotes here"
+                                        style="resize:none;"><?= $personRecord['quotes'] ?></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="w-100">
-                                <label for="foto" class="form-label">Link Profile Picture</label>
-                                <textarea class="form-control mb-2" id="foto" name="foto" rows="2"
-                                    placeholder="Input your photo profile link here"
-                                    style="resize:none;"><?= $personRecord['foto'] ?></textarea>
-                                <label for="alamat" class="form-label">Alamat</label>
-                                <textarea class="form-control mb-2" id="alamat" name="alamat" rows="3"
-                                    placeholder="Input your address here"
-                                    style="resize:none;"><?= $personRecord['alamat'] ?></textarea>
-                                <label for="quotes" class="form-label">Quotes</label>
-                                <textarea class="form-control mb-2" id="quotes" name="quotes" rows="3"
-                                    placeholder="Add your quotes here"
-                                    style="resize:none;"><?= $personRecord['quotes'] ?></textarea>
+                            <div class="btn-group mt-3">
+                                <button class="btn btn-outline-primary" type="submit" name="process" value="insert">
+                                    <i class='bx bx-add-to-queue me-1'></i> Simpan
+                                </button>
+                                <button class="btn btn-outline-warning" type="reset">
+                                    <i class='bx bx-message-square-x me-1'></i> Clear
+                                </button>
                             </div>
-                        </div>
-                        <div class="btn-group mt-3">
-                            <button class="btn btn-outline-primary" type="submit" name="process" value="insert">
-                                <i class='bx bx-add-to-queue me-1'></i> Simpan
-                            </button>
-                            <button class="btn btn-outline-warning" type="reset">
-                                <i class='bx bx-message-square-x me-1'></i> Clear
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Content End -->
+    <!-- Content End -->
+<?php else: ?>
+    <?php require_once './views/accesDenied.php' ?>
+<?php endif; ?>

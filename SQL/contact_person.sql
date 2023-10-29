@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 03:54 PM
+-- Generation Time: Oct 29, 2023 at 07:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -115,7 +115,8 @@ INSERT INTO `tb_person` (`id`, `nama_lengkap`, `gender`, `id_agama`, `tanggal_la
 (43, 'Lora Lorensa Manafe ', 'Perempuan', 1, '2001-10-30', 'Sulamu', 'Sulamu ', '081353024713', 'lhomanafe@gmail.com', 'Lhomnfe30 ', '', 'Politeknik Negeri kupang ', 'Jalan mu memang beda dengan mereka, tetapi kamu akan lebih kuat dari mereka.'),
 (44, 'Bagus Febriyanto', 'Laki-Laki', 3, '2002-02-02', 'Pati', 'Kab. Pati, Kec. Tayu, desa Pondowan', '08978270522', 'bagusfebriyanto19@gmail.com', '__imnotbgs', 'https://drive.google.com/open?id=1AYoQdvBrKcYi0B3IDswj3EDimV6PSkbN', 'Universitas Muria Kudus', 'Itami o kanjiro \n\nItami o kangaero\n\nItami o uketore \n\nItami o shire \n\nKoko yori.... sekai ni itami o..... SHINRA TENSEI!!!! ??????'),
 (45, 'Safitri ', 'Perempuan', 3, '2003-10-16', 'Jakarta ', 'Jakarta ', '084567444545', 'safitri1337@gmail.com', 'safitri16__', '', 'Universitas Bina Nusantara ', 'Nothing '),
-(46, 'Bagus Muhammad Mumtaza ', 'Laki-Laki', 3, '2003-08-20', 'Kota Pekalongan ', 'Indonesia, Jawa Tengah, Kota Pekalongan, Jl. KHM. Mansyur Bendan GG. 7', '085875282178', 'bagusbendan07@gmail.com', 'mmtza.mm', '', 'STMIK Widya Pratama Pekalongan ', 'Tetap semangat dan jangan menyerah apapun yang terjadi');
+(46, 'Bagus Muhammad Mumtaza ', 'Laki-Laki', 3, '2003-08-20', 'Kota Pekalongan ', 'Indonesia, Jawa Tengah, Kota Pekalongan, Jl. KHM. Mansyur Bendan GG. 7', '085875282178', 'bagusbendan07@gmail.com', 'mmtza.mm', '', 'STMIK Widya Pratama Pekalongan ', 'Tetap semangat dan jangan menyerah apapun yang terjadi'),
+(65, 'Fathan Mubin', 'Laki-Laki', 3, '1997-09-21', 'Jakarta', 'Jakarta, Indonesia', '085882103423', 'fathan@nurulfikri.ac.id', 'fathanmubin23', 'https://drive.google.com/open?id=1sreMEcexcfT4J6wVIvu1Ax7LjGxGxPBG', 'Nurul Fikri Computer', '\"Kemampuan individu seorang ninja memang penting, tetapi lebih penting lagi adalah kerja sama tim\". Hatake Kakashi - Naruto');
 
 -- --------------------------------------------------------
 
@@ -126,10 +127,20 @@ INSERT INTO `tb_person` (`id`, `nama_lengkap`, `gender`, `id_agama`, `tanggal_la
 CREATE TABLE `tb_users` (
   `id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `password` varchar(128) NOT NULL,
+  `password` varchar(254) NOT NULL,
   `role` enum('Mentor','Peserta') NOT NULL,
   `id_person` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_users`
+--
+
+INSERT INTO `tb_users` (`id`, `username`, `password`, `role`, `id_person`) VALUES
+(2, 'faykarr', 'f7a1a42dfe889ee79978fa06bd76801b5285a731', 'Mentor', 35),
+(7, 'irgiRama', 'd14b63af8f0d44751fa819cfb7fd96fdff3eaa11', 'Peserta', 1),
+(13, 'fathan_', '2753a1e5255c691b5aa0ca759ed2c081284b2bda', 'Mentor', 65),
+(15, 'adminUtama', '8da0a5ee649d1c418513809ba6980b8650bbac48', 'Mentor', NULL);
 
 --
 -- Indexes for dumped tables
@@ -172,13 +183,13 @@ ALTER TABLE `tb_agama`
 -- AUTO_INCREMENT for table `tb_person`
 --
 ALTER TABLE `tb_person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

@@ -30,7 +30,20 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                        <?php
+                        if ($_SESSION['dataUser']['foto'] !== null) {
+                            $link = $_SESSION['dataUser']['foto'];
+                            $startPos = strpos($link, "id=");
+                        }
+
+                        if ($startPos !== false && $_SESSION['dataUser']['foto'] !== null) {
+                            $startPos += 3; // Move past "id="
+                            $url = 'https://drive.google.com/uc?export=view&id=' . substr($link, $startPos);
+                        } else {
+                            $url = './assets/img/avatars/1.png';
+                        }
+                        ?>
+                        <img src="<?= $url ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -39,13 +52,20 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="./assets/img/avatars/1.png" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img src="<?= $url ?>" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">Nasyath Faykar</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-medium d-block">
+                                        <?php if ($_SESSION['dataUser']['nama_lengkap'] == null) {
+                                            echo $_SESSION['dataUser']['username'];
+                                        } else {
+                                            echo $_SESSION['dataUser']['nama_lengkap'];
+                                        } ?>
+                                    </span>
+                                    <small class="text-muted">
+                                        <?= $_SESSION['dataUser']['role'] ?>
+                                    </small>
                                 </div>
                             </div>
                         </a>
@@ -55,7 +75,7 @@
                     </li>
             </li>
             <li>
-                <a class="dropdown-item" href="./views/login.php">
+                <a class="dropdown-item" href="./views/logout.php">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Log Out</span>
                 </a>

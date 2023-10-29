@@ -1,4 +1,9 @@
 <?php
+session_start();
+// If session is not set then redirect to Login Page
+if (!isset($_SESSION['dataUser'])) {
+    header("location:./views/login.php");
+}
 // Remove warning message
 error_reporting(E_ALL ^ E_WARNING);
 

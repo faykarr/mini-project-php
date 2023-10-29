@@ -1,3 +1,10 @@
+<?php
+session_start();
+// If session is not set then redirect to Login Page
+if (isset($_SESSION['dataUser'])) {
+    header("location:../index.php?hal=dashboard");
+}
+?>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
@@ -110,11 +117,12 @@
                         <h4 class="mb-2">Welcome to Contaxa! 👋</h4>
                         <p class="mb-4">Please sign-in to your account and start to view your friend's contact.</p>
 
-                        <form id="formAuthentication" class="mb-3" action="../index.php" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="../controllers/AuthController.php"
+                            method="POST">
                             <div class="mb-3">
-                                <label for="email" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="email" name="email-username"
-                                    placeholder="Enter your username" autofocus />
+                                <label for="email" class="form-label">Username or Email</label>
+                                <input type="text" class="form-control" id="email" name="username"
+                                    placeholder="Enter your email or username" autofocus />
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">

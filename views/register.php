@@ -1,3 +1,10 @@
+<?php
+session_start();
+// If session is not set then redirect to Login Page
+if (isset($_SESSION['dataUser'])) {
+    header("location:../index.php?hal=dashboard");
+}
+?>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
@@ -141,7 +148,7 @@
 
                         <p class="text-center">
                             <span>Already have an account?</span>
-                            <a href="auth-login-basic.html">
+                            <a href="./login.php">
                                 <span>Sign in instead</span>
                             </a>
                         </p>

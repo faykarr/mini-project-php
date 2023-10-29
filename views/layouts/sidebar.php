@@ -77,39 +77,46 @@
             </a>
         </li>
 
-        <!-- Data Master -->
-        <li
-            class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit' || $_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active open' : ''; ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-component"></i>
-                <div data-i18n="Data Master"><b>Data Master</b></div>
-            </a>
+        <!-- Show when the logged user role is Mentor -->
+        <?php if ($_SESSION['dataUser']['role'] == 'Mentor'): ?>
+            <!-- Data Master -->
+            <li
+                class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit' || $_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active open' : ''; ?>">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-component"></i>
+                    <div data-i18n="Data Master"><b>Data Master</b></div>
+                </a>
 
-            <ul class="menu-sub">
-                <li
-                    class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active' : ''; ?>">
-                    <a href="index.php?hal=agamaList" class="menu-link">
-                        <div data-i18n="Data Agama">Master Agama</div>
-                    </a>
-                </li>
-                <li
-                    class="menu-item <?= ($_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active' : ''; ?>">
-                    <a href="index.php?hal=personList" class="menu-link">
-                        <div data-i18n="Data Person">Master Person</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                <ul class="menu-sub">
+                    <li
+                        class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active' : ''; ?>">
+                        <a href="index.php?hal=agamaList" class="menu-link">
+                            <div data-i18n="Data Agama">Master Agama</div>
+                        </a>
+                    </li>
+                    <li
+                        class="menu-item <?= ($_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active' : ''; ?>">
+                        <a href="index.php?hal=personList" class="menu-link">
+                            <div data-i18n="Data Person">Master Person</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        <?php endif; ?>
 
-        <!-- Users -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">User Control</span></li>
-        <!-- Users -->
-        <li class="menu-item">
-            <a href="index.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-user-account"></i>
-                <div data-i18n="User Control"><b>User Control</b></div>
-            </a>
-        </li>
+        <!-- Show when the logged user role is Mentor -->
+        <?php if ($_SESSION['dataUser']['role'] == 'Mentor'): ?>
+            <!-- Users -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">User Control</span></li>
+            <!-- Users -->
+            <li
+                class="menu-item <?= ($_GET['hal'] == 'usersList' || $_GET['hal'] == 'usersAdd' || $_GET['hal'] == 'usersEdit') ? 'active' : ''; ?>">
+                <a href="index.php?hal=usersList" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-user-account"></i>
+                    <div data-i18n="User Control"><b>User Control</b></div>
+                </a>
+            </li>
+        <?php endif; ?>
 
         <!-- Logout button -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Logout Section</span>
