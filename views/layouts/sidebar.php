@@ -70,8 +70,8 @@
         </li>
 
         <!-- Show Data Person -->
-        <li class="menu-item">
-            <a href="index.html" class="menu-link">
+        <li class="menu-item <?= ($_GET['hal'] == 'contactList' || $_GET['hal'] == 'contactShow') ? 'active' : ''; ?>">
+            <a href="index.php?hal=contactList" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-contact"></i>
                 <div data-i18n="Contact List"><b>Contact List</b></div>
             </a>
@@ -89,13 +89,13 @@
                 <li
                     class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active' : ''; ?>">
                     <a href="index.php?hal=agamaList" class="menu-link">
-                        <div data-i18n="Data Agama">Data Agama</div>
+                        <div data-i18n="Data Agama">Master Agama</div>
                     </a>
                 </li>
                 <li
                     class="menu-item <?= ($_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active' : ''; ?>">
                     <a href="index.php?hal=personList" class="menu-link">
-                        <div data-i18n="Data Person">Data Person</div>
+                        <div data-i18n="Data Person">Master Person</div>
                     </a>
                 </li>
             </ul>
