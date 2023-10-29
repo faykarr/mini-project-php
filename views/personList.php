@@ -4,16 +4,17 @@ error_reporting(E_ALL ^ E_WARNING);
 
 // make object from class contactModel
 $personModel = new ContactModel();
-// get all records from agamaModel
+// Pagination
+$jumlahDataPerHalaman = 7;
+$jumlahData = count($personModel->findAll());
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+// get all records from personModel
 if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
-    $personRecords = $personModel->search($_GET['keyword']);
+    $personRecords = $personModel->search($_GET['keyword'], $awalData, $jumlahDataPerHalaman);
+    $keyword = $_GET['keyword'];
 } else {
-    $jumlahDataPerHalaman = 7;
-    // $jumlahData = count($personModel->findAll());
-    $jumlahData = 50;
-    $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-    $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
-    $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
     $personRecords = $personModel->findAllLimit($awalData, $jumlahDataPerHalaman);
 }
 ?>
@@ -58,7 +59,6 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Lengkap</th>
-                                <th>Jenis Kelamin</th>
                                 <th>Asal Kampus</th>
                                 <th>Sosmed</th>
                                 <th>Foto Profile</th>
@@ -77,9 +77,6 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                                             </span></td>
                                         <td>
                                             <?= $value['nama_lengkap'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $value['gender'] ?>
                                         </td>
                                         <td>
                                             <?= $value['asal_kampus'] ?>
@@ -105,7 +102,6 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                                             } else {
                                                 $url = './assets/img/avatars/no-image.png';
                                             }
-
                                             ?>
                                             <div class="avatar avatar-sm">
                                                 <img src="<?= $url ?>" alt="Avatar" class="rounded-circle">
@@ -114,7 +110,7 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                                         <td>
                                             <!-- Input action delete update & view group without dropdown -->
                                             <div class="btn-group">
-                                                <a href="index.php?hal=personEdit&id=<?= $value['id'] ?>"
+                                                <a href="index.php?hal=personShow&id=<?= $value['id'] ?>"
                                                     class="btn btn-sm btn-outline-secondary">
                                                     <i class="bx bx-show"></i></a>
 
@@ -142,19 +138,20 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                         <ul class="pagination justify-content-end mb-0">
                             <?php if ($halamanAktif > 1): ?>
                                 <li class="page-item <?= ($halamanAktif < 1) ? 'disabled' : '' ?>">
-                                    <a href="index.php?hal=personList&halaman=<?= $halamanAktif - 1 ?>"
+                                    <a href="index.php?hal=personList&halaman=<?= $halamanAktif - 1 ?>&keyword=<?= $keyword ?>"
                                         class="page-link">Previous</a>
                                 </li>
                             <?php endif; ?>
                             <?php for ($i = 1; $i < $jumlahHalaman; $i++): ?>
                                 <?php if ($i == $halamanAktif): ?>
                                     <li class="page-item active"><a class="page-link"
-                                            href="index.php?hal=personList&halaman=<?= $i ?>">
+                                            href="index.php?hal=personList&halaman=<?= $i ?>&keyword=<?= $keyword ?>">
                                             <?= $i ?>
                                         </a></li>
                                 <?php else: ?>
                                     <li class="page-item" aria-current="page">
-                                        <a class="page-link" href="index.php?hal=personList&halaman=<?= $i ?>">
+                                        <a class="page-link"
+                                            href="index.php?hal=personList&halaman=<?= $i ?>&keyword=<?= $keyword ?>">
                                             <?= $i ?>
                                         </a>
                                     </li>
@@ -163,7 +160,7 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                             <?php if ($halamanAktif < $jumlahHalaman): ?>
                                 <li class="page-item">
                                     <a class="page-link"
-                                        href="index.php?hal=personList&halaman=<?= $halamanAktif + 1 ?>">Next</a>
+                                        href="index.php?hal=personList&halaman=<?= $halamanAktif + 1 ?>&keyword=<?= $keyword ?>">Next</a>
                                 </li>
                             <?php endif; ?>
                         </ul>

@@ -52,7 +52,6 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Agama</th>
-                                <th>jumlah Pemeluk</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -69,9 +68,6 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                                         <td>
                                             <?= $value['nama_agama'] ?>
                                         </td>
-                                        <td><span class="badge rounded-pill bg-label-warning">
-                                                <?= random_int(0, 30) ?> Orang
-                                            </span></td>
                                         <td>
                                             <!-- Input action delete update & view group without dropdown -->
                                             <div class="btn-group">

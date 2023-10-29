@@ -12,7 +12,7 @@ class ContactModel
     // Read all records
     public function findAll()
     {
-        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id";
+        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id ORDER BY tb_person.nama_lengkap ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +22,7 @@ class ContactModel
     // Read all records
     public function findAllLimit($awalData, $jumlahDataPerHalaman)
     {
-        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id LIMIT $awalData, $jumlahDataPerHalaman";
+        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id ORDER BY tb_person.nama_lengkap ASC LIMIT $awalData, $jumlahDataPerHalaman ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class ContactModel
     // Get 1 record
     public function find($id)
     {
-        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id WHERE tb_person.id_agama = ?";
+        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id WHERE tb_person.id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,11 +64,14 @@ class ContactModel
     }
 
     // Search
-    public function search($keyword)
+    public function search($keyword, $awalData, $jumlahDataPerHalaman)
     {
-        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id WHERE nama_lengkap OR asal_kampus OR gender OR tb_agama.nama_agama LIKE ?";
+        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id WHERE nama_lengkap LIKE ?
+        OR asal_kampus LIKE ?
+        OR gender LIKE ?
+        OR tb_agama.nama_agama LIKE ? LIMIT $awalData, $jumlahDataPerHalaman";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute(["%$keyword%"]);
+        $stmt->execute(["%$keyword%", "%$keyword%", "%$keyword%", "%$keyword%"]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
