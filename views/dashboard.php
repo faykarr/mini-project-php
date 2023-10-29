@@ -14,7 +14,7 @@
                                 this system application.
                             </p>
 
-                            <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
+                            <a href="index.php?hal=contactList" class="btn btn-sm btn-outline-primary">View
                                 Features</a>
                         </div>
                     </div>
