@@ -79,7 +79,7 @@
 
         <!-- Data Master -->
         <li
-            class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'personList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active open' : ''; ?>">
+            class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit' || $_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active open' : ''; ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-component"></i>
                 <div data-i18n="Data Master"><b>Data Master</b></div>
@@ -92,8 +92,9 @@
                         <div data-i18n="Data Agama">Data Agama</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li
+                    class="menu-item <?= ($_GET['hal'] == 'personList' || $_GET['hal'] == 'personAdd' || $_GET['hal'] == 'personEdit' || $_GET['hal'] == 'personShow') ? 'active' : ''; ?>">
+                    <a href="index.php?hal=personList" class="menu-link">
                         <div data-i18n="Data Person">Data Person</div>
                     </a>
                 </li>

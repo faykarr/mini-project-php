@@ -46,7 +46,7 @@ switch ($button) {
     case 'search':
         // Get keyword from input
         $keyword = $_POST['keyword'];
-        // Redirect to index.php?hal=agamaList
+        // Redirect to index.php?hal=agamaList with keyword
         header("location:../index.php?hal=agamaList&keyword=$keyword");
         break;
     default:
