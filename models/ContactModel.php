@@ -19,6 +19,16 @@ class ContactModel
         return $result;
     }
 
+    // Read all records
+    public function findAllLimit($awalData, $jumlahDataPerHalaman)
+    {
+        $query = "SELECT tb_person.*, tb_agama.nama_agama FROM tb_person INNER JOIN tb_agama ON tb_person.id_agama = tb_agama.id LIMIT $awalData, $jumlahDataPerHalaman";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     // Get 1 record
     public function find($id)
     {
@@ -30,7 +40,7 @@ class ContactModel
     }
 
     // Insert new record
-    public function save($data)
+    public function insert($data)
     {
         $query = "INSERT INTO tb_person (nama_lengkap, gender, id_agama, tanggal_lahir, tempat_lahir, alamat, no_hp, email, sosmed, foto, asal_kampus, quotes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);

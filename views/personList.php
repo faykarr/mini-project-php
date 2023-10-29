@@ -8,7 +8,13 @@ $personModel = new ContactModel();
 if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
     $personRecords = $personModel->search($_GET['keyword']);
 } else {
-    $personRecords = $personModel->findAll();
+    $jumlahDataPerHalaman = 7;
+    // $jumlahData = count($personModel->findAll());
+    $jumlahData = 50;
+    $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+    $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+    $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+    $personRecords = $personModel->findAllLimit($awalData, $jumlahDataPerHalaman);
 }
 ?>
 
@@ -47,7 +53,7 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
             <div class="card">
                 <h5 class="card-header">Daftar Contact</h5>
                 <div class="table-responsive text-nowrap">
-                    <table class="table text-center">
+                    <table class="table text-center table-hover">
                         <thead class="table-light">
                             <tr>
                                 <th>No.</th>
@@ -128,6 +134,40 @@ if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                             </form>
                         </tbody>
                     </table>
+                </div>
+                <hr class="mt-4 mb-0">
+                <div class="card-footer mb-0">
+                    <!-- Pagination -->
+                    <nav aria-label="pagination-contaxa mb-0">
+                        <ul class="pagination justify-content-end mb-0">
+                            <?php if ($halamanAktif > 1): ?>
+                                <li class="page-item <?= ($halamanAktif < 1) ? 'disabled' : '' ?>">
+                                    <a href="index.php?hal=personList&halaman=<?= $halamanAktif - 1 ?>"
+                                        class="page-link">Previous</a>
+                                </li>
+                            <?php endif; ?>
+                            <?php for ($i = 1; $i < $jumlahHalaman; $i++): ?>
+                                <?php if ($i == $halamanAktif): ?>
+                                    <li class="page-item active"><a class="page-link"
+                                            href="index.php?hal=personList&halaman=<?= $i ?>">
+                                            <?= $i ?>
+                                        </a></li>
+                                <?php else: ?>
+                                    <li class="page-item" aria-current="page">
+                                        <a class="page-link" href="index.php?hal=personList&halaman=<?= $i ?>">
+                                            <?= $i ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                            <?php if ($halamanAktif < $jumlahHalaman): ?>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        href="index.php?hal=personList&halaman=<?= $halamanAktif + 1 ?>">Next</a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

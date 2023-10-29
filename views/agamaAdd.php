@@ -8,14 +8,14 @@ error_reporting(E_ALL ^ E_WARNING);
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Header -->
     <div class="row justify-content-center">
-        <div class="col-12 mb-4">
+        <div class="col-sm-12 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center row justify-content-around">
                         <div class="col-sm-6 ">
                             <h5 class="card-title text-primary p-0 mb-0 text-center text-sm-start">Data Jenis Agama</h5>
                         </div>
-                        <div class="col-sm-6 mt-3 mt-sm-0 text-end">
+                        <div class="col-sm-6 mt-3 mt-sm-0 text-sm-end text-center">
                             <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon2"
                                 onclick="history.back();">
                                 <i class="bx bx-arrow-back me-1"></i> Back
@@ -28,7 +28,7 @@ error_reporting(E_ALL ^ E_WARNING);
     </div>
     <!-- Table -->
     <div class="row justify-content-center mt-5">
-        <div class="col-6">
+        <div class="col-sm-6">
             <div class="card">
                 <h5 class="card-header">Form Input Agama</h5>
                 <hr class="m-0 w-100">
