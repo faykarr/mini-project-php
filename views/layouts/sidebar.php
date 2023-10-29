@@ -58,8 +58,8 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active">
-            <a href="index.html" class="menu-link active">
+        <li class="menu-item <?= ($_GET['hal'] == 'dashboard' || $_GET['hal'] == '') ? 'active' : ''; ?>">
+            <a href="index.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Dashboards"><b>Dashboards</b></div>
             </a>
@@ -78,15 +78,17 @@
         </li>
 
         <!-- Data Master -->
-        <li class="menu-item">
+        <li
+            class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'personList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active open' : ''; ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-component"></i>
                 <div data-i18n="Data Master"><b>Data Master</b></div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li
+                    class="menu-item <?= ($_GET['hal'] == 'agamaList' || $_GET['hal'] == 'agamaAdd' || $_GET['hal'] == 'agamaEdit') ? 'active' : ''; ?>">
+                    <a href="index.php?hal=agamaList" class="menu-link">
                         <div data-i18n="Data Agama">Data Agama</div>
                     </a>
                 </li>

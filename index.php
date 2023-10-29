@@ -1,11 +1,14 @@
 <?php
-// Remove warning
-error_reporting(E_ERROR | E_PARSE);
+// Remove warning message
+error_reporting(E_ALL ^ E_WARNING);
 
 include_once './config/Connection.php';
 include_once './models/AgamaModel.php';
 include_once './models/ContactModel.php';
 include_once './models/UserModel.php';
+
+//tangkap request di URL
+$hal = $_REQUEST['hal'];
 ?>
 <!DOCTYPE html>
 
@@ -66,8 +69,6 @@ include_once './models/UserModel.php';
                 <div class="content-wrapper">
                     <!-- Content -->
                     <?php
-                    //tangkap request di URL
-                    $hal = $_REQUEST['hal'];
                     //tempatkan halaman sesuai request di URL
                     if (!empty($hal)) {
                         include_once './views/' . $hal . '.php';

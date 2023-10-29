@@ -11,7 +11,9 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <b>Dashboards</b>
+                <b>
+                    <?= preg_replace('/([a-z])([A-Z])/', '$1 $2', empty($hal) ? 'Dashboard' : ucwords($hal)); ?>
+                </b>
             </div>
         </div>
         <!-- /Search -->
